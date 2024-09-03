@@ -63,7 +63,6 @@ def reserve_dates(transient, available_dates, transients):
                 date_from = input("Enter reservation start date (YYYY-MM-DD): ").strip()
                 date_to = input("Enter reservation end date (YYYY-MM-DD): ").strip()
                 number_of_people = int(input("Enter number of people: ").strip())
-
                 # Validate date format
                 try:
                     start_date = datetime.strptime(date_from, '%Y-%m-%d')
@@ -90,13 +89,24 @@ def reserve_dates(transient, available_dates, transients):
                     print("Error: Some dates in the selected range are not available.")
                     continue
 
+                pay_method = input_pay_method()
+
+                price_per_head = transient["price_per_head"]
+                total_cost = number_of_people * price_per_head
+
                 # Confirm reservation
                 print()
                 print("Reservation Details")
                 print(f"Client Name: {client_name}")
                 print(f"Reservation From: {date_from}")
                 print(f"Reservation To: {date_to}")
+                print("Payment method: GCASH")
                 print(f"Number of People: {number_of_people}")
+                print("\nTotal cost: ₱",total_cost, sep="")
+
+                confirm = input_confirm()
+                if confirm == "n":
+                    continue
 
                 # Update verified details on JSON
                 current_date = start_date
@@ -121,10 +131,29 @@ def reserve_dates(transient, available_dates, transients):
                 print("Invalid input. Please enter the number of people as an integer.")
         elif ans_input in ["n", "no"]:
             print("Returning to main menu.")
-            break
+            return 0
         else:
             print("Invalid input. Please enter yes/no or y/n.")
 
+def input_pay_method():
+    print()
+    while True:
+        pay_method = input("1.GCASH \nSelect a payment method: ")
+        if pay_method == "1":
+            return "GCASH"
+        else:
+            print("\nInvalid!")
+
+def input_confirm():
+    while True:
+        #Confirmation
+        ans_input = input("Are you sure? (y/n) ").strip().lower()
+        if ans_input in ["y", "yes"]:
+            return "y"
+        elif ans_input in ["n", "no"]:
+            return "n"
+        else:
+            print("Invalid input. Please enter yes/no or y/n.")
 
 def main():
     transients = load_json(file_path)
@@ -158,8 +187,13 @@ def main():
                 if available_dates == 0:
                     show_transient_table(transients)
                     continue
-                reserve_dates(selected_transient, available_dates, transients)
-                break
+
+                loop = reserve_dates(selected_transient, available_dates, transients)
+                if loop == 0:
+                    show_transient_table(transients)
+                    continue
+                else:
+                    break
             else:
                 print("Invalid ID. Please enter a valid transient house ID!")
 

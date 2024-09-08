@@ -1,5 +1,7 @@
 import os
 import json
+from operator import itemgetter
+
 from prettytable import PrettyTable
 from datetime import datetime, timedelta
 
@@ -13,10 +15,17 @@ def load_json(file_path):
         return json.load(file)
 
 
-def show_transient_table(transients):
+def show_transient_table(transients, sort_choice=None):
     main_table = PrettyTable()
-    main_table.field_names = ["ID", "Name", "Address", "Price/Head", "Contact"]
 
+
+    transients_sorted_asc = sorted(transients ,key=itemgetter("price_per_head"))
+    transients_sorted_desc = sorted(transients ,key=itemgetter("price_per_head"), reverse=True)
+    if sort_choice == 1:
+        transients = transients_sorted_asc
+    elif sort_choice == 2:
+        transients = transients_sorted_desc
+    main_table.field_names = ["ID", "Name", "Address", "Price/Head", "Contact"]
     for transient in transients:
         main_table.add_row(
             [transient["id"],
@@ -36,13 +45,16 @@ def show_available_dates(transient):
 
     available_dates = []  # List holding available dates
     available_dates_table = PrettyTable()
-    available_dates_table.field_names = ["Dates", "Status"]
+    available_dates_table.field_names = ["ID","Dates", "Status"]
+
+    index = 0
 
     for date, details in transient['availability'].items():
         status = details['status'].upper()
         # Remove dates with "RESERVED" status
         if status != "RESERVED":
-            available_dates_table.add_row([date, status])
+            index += 1
+            available_dates_table.add_row([index, date, status])
             available_dates.append(date)
     # Notify user if there are no available dates in a transient
     if len(available_dates) == 0:
@@ -55,13 +67,15 @@ def show_available_dates(transient):
 
 
 def reserve_dates(transient, available_dates, transients):
+    available_dates_list = list(available_dates)
+    available_dates_list.sort()
     while True:
         ans_input = input("Would you like to reserve? (y/n) ").strip().lower()
         if ans_input in ["y", "yes"]:
             try:
                 client_name = input("Enter client name: ").strip()
-                date_from = input("Enter reservation start date (YYYY-MM-DD): ").strip()
-                date_to = input("Enter reservation end date (YYYY-MM-DD): ").strip()
+                date_from = input_reserve_date("Enter ID to select reservation start date: ",available_dates_list)
+                date_to = input_reserve_date("Enter ID to select reservation end date: ", available_dates_list)
                 number_of_people = int(input("Enter number of people: ").strip())
                 # Validate date format
                 try:
@@ -135,6 +149,19 @@ def reserve_dates(transient, available_dates, transients):
         else:
             print("Invalid input. Please enter yes/no or y/n.")
 
+def input_reserve_date(message, available_dates):
+    while True:
+        try:
+            choice = int(input(message))
+            if choice < 1 or choice > len(available_dates):
+                print("Invalid Input. Please enter a number from 1 to",len(available_dates))
+            else:
+                date = available_dates[choice-1]
+                break
+        except ValueError:
+            print("Invalid input. Please enter a number")
+    return date
+
 def input_pay_method():
     print()
     while True:
@@ -169,7 +196,9 @@ def main():
     print("Where Every Stay Feels Like Home".center(terminal_width))
 
     # Show the table
+
     show_transient_table(transients)
+    menu(transients)
 
     # Prompt for user input
     print()
@@ -191,6 +220,7 @@ def main():
                 loop = reserve_dates(selected_transient, available_dates, transients)
                 if loop == 0:
                     show_transient_table(transients)
+                    menu(transients)
                     continue
                 else:
                     break
@@ -200,6 +230,35 @@ def main():
         except ValueError:
             print("Main Menu: Invalid input. Please enter a number.")
 
+def menu(transients):
+    while True:
+        print("Menu")
+        print("1. Select transient to book")
+        print("2. Sort transient list")
+        try:
+            choice = int(input("Enter a number from the menu: "))
+            if choice == 1:
+                break
+            elif choice == 2:
+                print("\nSort")
+                print("1. Sort by price in ascending order")
+                print("2. Sort by price in descending order")
+                print("3. Sort by ID")
+                choice_sort = int(input("Enter a number from the menu: "))
+                if choice_sort == 1:
+                    show_transient_table(transients, 1)
+                    continue
+                elif choice_sort ==2:
+                    show_transient_table(transients, 2)
+                    continue
+                elif choice_sort ==3:
+                    show_transient_table(transients)
+                else:
+                    print("Invalid Input. Please enter a number from 1 to 2\n")
+            else:
+                print("Invalid Input. Please enter a number from 1 to 2\n")
+        except ValueError:
+            print("Invalid Input. Please enter a number\n")
 
 # Main Method
 if __name__ == "__main__":

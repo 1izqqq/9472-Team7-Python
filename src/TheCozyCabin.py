@@ -1,5 +1,6 @@
 import os
 import json
+import re
 
 from prettytable import PrettyTable
 from datetime import datetime, timedelta
@@ -83,7 +84,7 @@ def reserve_dates(transient, available_dates, transients):
                 while True:
                     client_name = input("Enter client name: ").strip()
                     # Client name must not contain any integer
-                    if not client_name in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" or client_name == "":
+                    if not re.match("[A-za-z]+$", client_name):
                         print("Invalid name! Client name should not contain numbers or special characters. Please try again.")
                     else:
                         break

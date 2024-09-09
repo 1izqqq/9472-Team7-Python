@@ -8,7 +8,6 @@ from datetime import datetime, timedelta
 # File path where the JSON file is saved
 file_path = 'transient_list.json'
 
-
 # Load JSON file
 def load_json(file_path):
     with open(file_path, 'r') as file:
@@ -38,14 +37,12 @@ def show_transient_table(transients, sort_choice=None, filter_choice=None, filte
 
     print(main_table)
 
-
 def filter_transients(transients, filter_choice, filter_query):
     if filter_choice == 1:  # Filter by transient name
         return [t for t in transients if filter_query.lower() in t["name"].lower()]
     elif filter_choice == 2:  # Filter by address
         return [t for t in transients if filter_query.lower() in t["location"].lower()]
     return transients
-
 
 def show_available_dates(transient):
     print(f"Name: {transient['name']}")
@@ -74,7 +71,6 @@ def show_available_dates(transient):
     print(available_dates_table)
 
     return set(available_dates)
-
 
 def reserve_dates(transient, available_dates, transients):
     available_dates_list = list(available_dates)
@@ -148,8 +144,7 @@ def reserve_dates(transient, available_dates, transients):
                 print(f"Reservation To: {date_to}")
                 print(f"Payment method: {pay_method}")
                 print(f"Number of People: {number_of_people}")
-                print(
-                    f"Cost for {number_of_people} people staying {num_nights} nights at ₱{price_per_head} per person:")
+                print(f"Calculating cost for {number_of_people} people staying {num_nights} night/s at ₱{price_per_head} per person...")
                 print("Total cost: ₱", total_cost, sep="")
 
                 confirm = input_confirm()
@@ -173,8 +168,7 @@ def reserve_dates(transient, available_dates, transients):
 
                 print()
                 print("Reservation confirmed and saved.")
-                print(
-                    f"Dear Mr./Ms. {client_name}, please proceed to {transient['location']} on {date_from} to {date_to}.")
+                print(f"Dear Mr./Ms. {client_name}, please proceed to {transient['location']} on {date_from} and enjoy your stay until {date_to}.")
                 print("Thank you for trusting The Cozy Cabin.")
                 break
 
@@ -186,7 +180,6 @@ def reserve_dates(transient, available_dates, transients):
             return 0
         else:
             print("Invalid input. Please enter yes/no or y/n.")
-
 
 def input_reserve_date(message, available_dates):
     while True:
@@ -200,7 +193,6 @@ def input_reserve_date(message, available_dates):
         except ValueError:
             print("Invalid input. Please enter a number.")
     return date
-
 
 def input_pay_method():
     print()
@@ -216,7 +208,6 @@ def input_pay_method():
         else:
             print("\nInvalid! Please select one of the options.")
 
-
 def input_confirm():
     while True:
         # Confirmation
@@ -227,7 +218,6 @@ def input_confirm():
             return "n"
         else:
             print("Invalid input. Please enter yes/no or y/n.")
-
 
 def menu(transients):
     while True:
@@ -278,13 +268,14 @@ def menu(transients):
                 choice_filter = int(input("Enter a number from the menu: "))
             except ValueError:
                 print("Invalid Input. Please enter a valid number.")
+                continue
 
             if choice_filter in [1, 2]:
                 filter_query = input("Enter your filter query: ").strip()
                 if filter_query:
                     filtered_transients = filter_transients(transients, choice_filter, filter_query)
                     if filtered_transients:
-                        show_transient_table(filtered_transients)  # Show filtered table
+                        show_transient_table(filtered_transients)
                     else:
                         print(
                             f"\nNo transients found matching the {'name' if choice_filter == 1 else 'address'}: {filter_query}")
@@ -295,7 +286,7 @@ def menu(transients):
             else:
                 print("Invalid Input. Please enter a number from 1 to 3.")
         else:
-            print("Invalid Input. Please enter a number from 1 to 4.")
+            print("Invalid Input. Please enter a number from 1 to 3.")
 
 def main():
     # Load JSON file
@@ -343,7 +334,6 @@ def main():
                 print("Invalid ID. Please enter a valid transient house ID!")
         except ValueError:
             print("Invalid input. Please enter a number.")
-
 
 # Main Method
 if __name__ == "__main__":

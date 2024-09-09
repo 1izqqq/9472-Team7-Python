@@ -8,21 +8,21 @@
         "contact": "09293375472",
         "availability": {
             "2024-09-01": {
-               "status": "available",
-                "client_name": "",
-                "date_from": "",
-                "date_to": "",
-                "number_of_people": 0
+                "status": "RESERVED",
+                "client_name": "liza",
+                "date_from": "2024-09-01",
+                "date_to": "2024-09-01",
+                "number_of_people": 9
             },
             "2024-09-02": {
-               "status": "available",
+                "status": "available",
                 "client_name": "",
                 "date_from": "",
                 "date_to": "",
                 "number_of_people": 0
             },
             "2024-09-03": {
-               "status": "available",
+                "status": "available",
                 "client_name": "",
                 "date_from": "",
                 "date_to": "",
@@ -168,18 +168,18 @@
                 "number_of_people": 5
             },
             "2024-09-15": {
-               "status": "available",
-                "client_name": "",
-                "date_from": "",
-                "date_to": "",
-                "number_of_people": 0
+                "status": "RESERVED",
+                "client_name": "bry",
+                "date_from": "2024-09-15",
+                "date_to": "2024-09-16",
+                "number_of_people": 2
             },
             "2024-09-16": {
-                "status": "available",
-                "client_name": "",
-                "date_from": "",
-                "date_to": "",
-                "number_of_people": 0
+                "status": "RESERVED",
+                "client_name": "bry",
+                "date_from": "2024-09-15",
+                "date_to": "2024-09-16",
+                "number_of_people": 2
             },
             "2024-09-17": {
                 "status": "available",
@@ -269,18 +269,18 @@
                 "number_of_people": 4
             },
             "2024-09-28": {
-                "status": "available",
-                "client_name": "",
-                "date_from": "",
-                "date_to": "",
-                "number_of_people": 0
+                "status": "RESERVED",
+                "client_name": "bry",
+                "date_from": "2024-09-28",
+                "date_to": "2024-09-29",
+                "number_of_people": 3
             },
             "2024-09-29": {
-                "status": "available",
-                "client_name": "",
-                "date_from": "",
-                "date_to": "",
-                "number_of_people": 0
+                "status": "RESERVED",
+                "client_name": "bry",
+                "date_from": "2024-09-28",
+                "date_to": "2024-09-29",
+                "number_of_people": 3
             }
         }
     },

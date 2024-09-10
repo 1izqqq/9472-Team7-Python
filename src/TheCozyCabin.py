@@ -17,14 +17,6 @@ def load_json(file_path):
 def show_transient_table(transients, sort_choice=None):
     main_table = PrettyTable()
 
-    # Sort transients based on price
-    transients_sorted_asc = sorted(transients, key=lambda x:x["price_per_head"])
-    transients_sorted_desc = sorted(transients, key=lambda x:x["price_per_head"], reverse=True)
-    if sort_choice == 1:
-        transients = transients_sorted_asc
-    elif sort_choice == 2:
-        transients = transients_sorted_desc
-
     # Display the table
     main_table.field_names = ["ID", "Name", "Address", "Price/Head", "Contact"]
     for transient in transients:
@@ -35,6 +27,14 @@ def show_transient_table(transients, sort_choice=None):
              f"₱{transient['price_per_head']}",
              transient["contact"]])
 
+    # Sort transients based on price
+    transients_sorted_asc = sorted(transients, key=lambda x:x["price_per_head"])
+    transients_sorted_desc = sorted(transients, key=lambda x:x["price_per_head"], reverse=True)
+    if sort_choice == 1:
+        transients = transients_sorted_asc
+    elif sort_choice == 2:
+        transients = transients_sorted_desc
+        
     print(main_table)
 
 def filter_transients(transients, filter_choice, filter_query):

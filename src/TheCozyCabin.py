@@ -66,11 +66,19 @@ def show_available_dates(transient):
             index += 1
             available_dates_table.add_row([index, date, status])
             available_dates.append(date)
+
     # Notify user if there are no available dates in a transient
     if len(available_dates) == 0:
-        input("This transient has no available dates. Please select other transients.\nPress enter to continue.")
-        return 0
-    # Print table
+        print("This transient has no available dates.")
+        print("Would you like to select another transient or go back to the main menu?")
+        print("1. Select another transient")
+        print("2. Go back to main menu")
+        user_choice = input("Enter a number from the menu: ")
+        if user_choice == '1':
+            return 1
+        elif user_choice == '2':
+            return 2
+
     print(available_dates_table)
 
     return set(available_dates)
@@ -328,9 +336,12 @@ def main():
             selected_transient = next((t for t in transients if t['id'] == option), None)
             if selected_transient:
                 available_dates = show_available_dates(selected_transient)
-                # Loop if no available dates in a transient
-                if available_dates == 0:
+                # Prompt user to select another transient or go back to main menu
+                if available_dates == 1:
                     show_transient_table(transients)
+                    continue
+                elif available_dates == 2:
+                    menu(transients)
                     continue
 
                 loop = reserve_dates(selected_transient, available_dates, transients)

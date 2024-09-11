@@ -26,16 +26,19 @@ def show_transient_table(transients, sort_choice=None):
              transient["location"],
              f"₱{transient['price_per_head']}",
              transient["contact"]])
-
-    # Sort transients based on price
-    transients_sorted_asc = sorted(transients, key=lambda x:x["price_per_head"])
-    transients_sorted_desc = sorted(transients, key=lambda x:x["price_per_head"], reverse=True)
-    if sort_choice == 1:
-        transients = transients_sorted_asc
-    elif sort_choice == 2:
-        transients = transients_sorted_desc
         
     print(main_table)
+
+def sort_transients(transients, sort_choice):
+    # Sort transients based on price
+    transients_sorted_asc = sorted(transients, key=lambda x: x["price_per_head"])
+    transients_sorted_desc = sorted(transients, key=lambda x: x["price_per_head"], reverse=True)
+    if sort_choice == 1:
+        return transients_sorted_asc
+    elif sort_choice == 2:
+        return transients_sorted_desc
+    else:
+        return transients
 
 def filter_transients(transients, filter_choice, filter_query):
     if filter_choice == 1:  # Filter by transient name
@@ -84,7 +87,7 @@ def reserve_dates(transient, available_dates, transients):
                 while True:
                     client_name = input("Enter client name: ").strip()
                     # Client name must not contain any integer
-                    if not re.match("[A-za-z]+$", client_name):
+                    if not re.match("^[A-Za-z\\s\\-]+$", client_name):
                         print("Invalid name! Client name should not contain numbers or special characters. Please try again.")
                     else:
                         break
@@ -244,12 +247,13 @@ def menu(transients):
             while choice_sort != 4:
                     try:
                         choice_sort = int(input("Enter a number from the menu: "))
-
                         if choice_sort == 1:
-                            show_transient_table(transients, 1)
+                            sorted_transient = sort_transients(transients, 1)
+                            show_transient_table(sorted_transient)
                             break
                         elif choice_sort == 2:
-                            show_transient_table(transients, 2)
+                            sorted_transients = sort_transients(transients, 2)
+                            show_transient_table(sorted_transients)
                             break
                         elif choice_sort == 3:
                             show_transient_table(transients)
@@ -284,6 +288,7 @@ def menu(transients):
                         else:
                             print(
                                 f"\nNo transients found matching the {'name' if choice_filter == 1 else 'address'}: {filter_query}")
+                            continue
                     else:
                         print("Filter query cannot be empty.")
                 elif choice_filter == 3:

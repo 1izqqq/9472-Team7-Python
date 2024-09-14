@@ -261,14 +261,13 @@ class Menu:
             print("Invalid input. Please enter a number.")
 
     def sort_menu(self):
-        print("\nSort")
-        print("1. Sort by price in ascending order")
-        print("2. Sort by price in descending order")
-        print("3. Sort by ID")
-        print("4. Go back to Main Menu")
+        while True:
+            print("\nSort")
+            print("1. Sort by price in ascending order")
+            print("2. Sort by price in descending order")
+            print("3. Sort by ID")
+            print("4. Go back to Main Menu")
 
-        choice_sort = 0
-        while choice_sort != 4:
             try:
                 choice_sort = int(input("Enter a number from the menu: "))
                 if choice_sort == 1:

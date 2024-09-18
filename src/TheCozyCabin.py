@@ -172,13 +172,13 @@ def reserve_dates(transient, available_dates, transients):
 
             except ValueError:
                 print("Invalid input. Please enter the number of people as an integer.")
+
         elif ans_input in ["n", "no"]:
             print()
             print("Returning to main menu.")
             return 0
         else:
             print("Invalid input. Please enter yes/no or y/n.")
-
 
 def input_reserve_date(message, available_dates):
     while True:
@@ -230,6 +230,7 @@ class Menu:
             print("1. Select transient to book")
             print("2. Sort transient list")
             print("3. Filter transient list")
+            print("4. Exit Cozy Cabin")
             try:
                 choice = int(input("Enter a number from the menu: "))
             except ValueError:
@@ -242,8 +243,10 @@ class Menu:
                 self.sort_menu()
             elif choice == 3:
                 self.filter_menu()
+            elif choice == 4:
+                exit(0)
             else:
-                print("Invalid Input. Please enter a number from 1 to 3.")
+                print("Invalid Input. Please enter a number from 1 to 4.")
 
     def select_transient(self):
         show_transient_table(self.transients)

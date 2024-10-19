@@ -1,9 +1,6 @@
-import os
-import json
 import re
-import sortfilter
-import filereader
-import printmethods
+import file_reader
+import print_methods
 
 from prettytable import PrettyTable
 from datetime import datetime, timedelta
@@ -90,7 +87,7 @@ def reserve_dates(transient, available_dates, transients):
                 total_cost = number_of_people * price_per_head * num_nights
 
                 # Confirm reservation
-                printmethods.show_reservation_details(client_name, date_from, date_to, pay_method, number_of_people, num_nights, price_per_head, total_cost)
+                print_methods.show_reservation_details(client_name, date_from, date_to, pay_method, number_of_people, num_nights, price_per_head, total_cost)
 
                 confirm = input_confirm()
                 if confirm == "n":
@@ -108,7 +105,7 @@ def reserve_dates(transient, available_dates, transients):
                     current_date += timedelta(days=1)
 
                 # Save the updated data back to the JSON file
-                filereader.save_json(transients,file_path)
+                file_reader.save_json(transients,file_path)
 
                 print()
                 print("Reservation confirmed and saved.")
@@ -182,108 +179,3 @@ def enter_choice(min_num, max_num, message):
                 return choice
         except ValueError:
             print("Invalid Input. Please enter a valid number.")
-
-
-class Menu:
-    def __init__(self, transients):
-        self.transients = transients
-
-    def display_menu(self):
-        while True:
-            print("\nMain Menu")
-            print("1. Select transient to book")
-            print("2. Sort transient list")
-            print("3. Filter transient list")
-            print("4. Exit Cozy Cabin")
-            choice = enter_choice(1,4, "Enter a number from the menu: ")
-
-            if choice == 1:
-                self.select_transient()
-            elif choice == 2:
-                self.sort_menu()
-            elif choice == 3:
-                self.filter_menu()
-            elif choice == 4:
-                exit(0)
-
-    def select_transient(self):
-        printmethods.show_transient_table(self.transients)
-        user_input = input("Please input transient house's ID: ").strip()
-        try:
-            option = int(user_input)
-            selected_transient = next((t for t in self.transients if t['id'] == option), None)
-            if selected_transient:
-                available_dates = show_available_dates(selected_transient)
-                if available_dates:
-                    reserve_dates(selected_transient, available_dates, self.transients)
-            else:
-                print("Invalid ID. Please enter a valid transient house ID!")
-        except ValueError:
-            print("Invalid input. Please enter a number.")
-
-    def sort_menu(self):
-        while True:
-            print("\nSort")
-            print("1. Sort by price in ascending order")
-            print("2. Sort by price in descending order")
-            print("3. Sort by ID")
-            print("4. Go back to Main Menu")
-
-            choice_sort = enter_choice(1,4,"Enter a number from the menu: ")
-
-            if choice_sort == 1:
-                sorted_transient = sortfilter.sort_transients_price(self.transients, "asc")
-                printmethods.show_transient_table(sorted_transient)
-            elif choice_sort == 2:
-                sorted_transient = sortfilter.sort_transients_price(self.transients, "desc")
-                printmethods.show_transient_table(sorted_transient)
-            elif choice_sort == 3:
-                printmethods.show_transient_table(self.transients)
-            elif choice_sort == 4:
-                break
-
-    def filter_menu(self):
-        while True:
-            print("\nFilter")
-            print("1. Filter by transient name")
-            print("2. Filter by address")
-            print("3. Go back to Main Menu")
-
-            choice_filter = enter_choice(1,3,"Enter a number from the menu: ")
-
-            if choice_filter in [1, 2]:
-                filter_query = input("Enter your filter query: ").strip()
-                if filter_query:
-                    filtered_transients = sortfilter.filter_transients(self.transients, choice_filter, filter_query)
-                    if filtered_transients:
-                        printmethods.show_transient_table(filtered_transients)
-                    else:
-                        print(f"\nNo transients found matching the query: {filter_query}")
-                else:
-                    print("Filter query cannot be empty.")
-            elif choice_filter == 3:
-                break
-
-
-def main():
-    # Load JSON file
-    transients = filereader.load_json(file_path)
-
-    try:
-        terminal_width = os.get_terminal_size().columns
-    except OSError:
-        terminal_width = 110
-
-    # Print title
-    print("The Cozy Cabin".center(terminal_width))
-    print("Where Every Stay Feels Like Home".center(terminal_width))
-
-    # Show the table
-    printmethods.show_transient_table(transients)
-
-    # Instantiate and display the menu
-    menu = Menu(transients)
-    menu.display_menu()
-
-if __name__ == "__main__":
-    main()

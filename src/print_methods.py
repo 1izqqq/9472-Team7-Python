@@ -1,4 +1,7 @@
 # Function to display the transient table
+from prettytable import PrettyTable
+
+
 def show_transient_table(transients):
     main_table = PrettyTable()
     main_table.field_names = ["ID", "Name", "Address", "Price/Head", "Contact"]

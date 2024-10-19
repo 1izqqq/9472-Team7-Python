@@ -220,18 +220,18 @@
         "contact": "09273849512",
         "availability": {
             "2024-09-21": {
-                "status": "available",
-                "client_name": "",
-                "date_from": "",
-                "date_to": "",
-                "number_of_people": 0
+                "status": "RESERVED",
+                "client_name": "jp",
+                "date_from": "2024-09-21",
+                "date_to": "2024-09-22",
+                "number_of_people": 2
             },
             "2024-09-22": {
-                "status": "available",
-                "client_name": "",
-                "date_from": "",
-                "date_to": "",
-                "number_of_people": 0
+                "status": "RESERVED",
+                "client_name": "jp",
+                "date_from": "2024-09-21",
+                "date_to": "2024-09-22",
+                "number_of_people": 2
             },
             "2024-09-23": {
                 "status": "available",
@@ -418,32 +418,32 @@
         "contact": "09212345678",
         "availability": {
             "2024-10-15": {
-                "status": "available",
-                "client_name": "",
-                "date_from": "",
-                "date_to": "",
-                "number_of_people": 0
+                "status": "RESERVED",
+                "client_name": "Liza",
+                "date_from": "2024-10-15",
+                "date_to": "2024-10-16",
+                "number_of_people": 1
             },
             "2024-10-16": {
-                "status": "available",
-                "client_name": "",
-                "date_from": "",
-                "date_to": "",
-                "number_of_people": 0
+                "status": "RESERVED",
+                "client_name": "Liza",
+                "date_from": "2024-10-15",
+                "date_to": "2024-10-16",
+                "number_of_people": 1
             },
             "2024-10-17": {
-                "status": "available",
-                "client_name": "",
-                "date_from": "",
-                "date_to": "",
-                "number_of_people": 0
+                "status": "RESERVED",
+                "client_name": "jp",
+                "date_from": "2024-10-17",
+                "date_to": "2024-10-18",
+                "number_of_people": 3
             },
             "2024-10-18": {
-                "status": "available",
-                "client_name": "",
-                "date_from": "",
-                "date_to": "",
-                "number_of_people": 0
+                "status": "RESERVED",
+                "client_name": "jp",
+                "date_from": "2024-10-17",
+                "date_to": "2024-10-18",
+                "number_of_people": 3
             },
             "2024-10-19": {
                 "status": "reserved",

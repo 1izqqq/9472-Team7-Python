@@ -1,11 +1,11 @@
 import re
-import file_reader
 import print_methods
 
 from prettytable import PrettyTable
 from datetime import datetime, timedelta
+from file_reader import FileReader
 
-file_path = 'transient_list.json'
+file_path = '../transient_list.json'
 
 def show_available_dates(transient):
     print(f"Name: {transient['name']}")
@@ -105,13 +105,17 @@ def reserve_dates(transient, available_dates, transients):
                     current_date += timedelta(days=1)
 
                 # Save the updated data back to the JSON file
-                file_reader.save_json(transients,file_path)
+                FileReader.save_json(transients,file_path)
+
+                confirmation_message = (
+                    f"Reservation confirmed and saved.\n"
+                    f"Dear Mr./Ms. {client_name}, please proceed to {transient['location']} on {date_from} and enjoy your stay until {date_to}.\n"
+                    "Thank you for trusting The Cozy Cabin."
+                )
 
                 print()
-                print("Reservation confirmed and saved.")
-                print(f"Dear Mr./Ms. {client_name}, please proceed to {transient['location']} on {date_from} and enjoy your stay until {date_to}.")
-                print("Thank you for trusting The Cozy Cabin.")
-                break
+                print(confirmation_message)
+                return confirmation_message
 
             except ValueError:
                 print("Invalid input. Please enter the number of people as an integer.")

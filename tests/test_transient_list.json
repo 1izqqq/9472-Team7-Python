@@ -1,0 +1,18 @@
+[
+    {
+        "id": "1",
+        "name": "Transient 1",
+        "description": "A cozy cabin.",
+        "location": "Location A",
+        "price_per_head": 150,
+        "contact": "1234567890"
+    },
+    {
+        "id": "2",
+        "name": "Transient 2",
+        "description": "A lovely cottage.",
+        "location": "Location B",
+        "price_per_head": 200,
+        "contact": "0987654321"
+    }
+]

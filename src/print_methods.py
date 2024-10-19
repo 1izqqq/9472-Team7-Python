@@ -1,12 +1,13 @@
 # Function to display the transient table
 from prettytable import PrettyTable
 
-
 def show_transient_table(transients):
     main_table = PrettyTable()
     main_table.field_names = ["ID", "Name", "Address", "Price/Head", "Contact"]
 
     for transient in transients:
+        print(transient)
+
         main_table.add_row(
             [transient["id"], transient["name"], transient["location"],
              f"₱{transient['price_per_head']}", transient["contact"]])

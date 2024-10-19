@@ -1,5 +1,4 @@
 import re
-import file_reader
 import print_methods
 
 from prettytable import PrettyTable

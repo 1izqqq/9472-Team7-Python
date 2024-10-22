@@ -15,18 +15,18 @@ class TestMenu(unittest.TestCase):
                 "contact": "09293375472",
                 "availability": {
                     "2024-09-01": {
-                        "status": "RESERVED",
-                        "client_name": "liza",
-                        "date_from": "2024-09-01",
-                        "date_to": "2024-09-01",
-                        "number_of_people": 9
+                        "status": "AVAILABLE",
+                        "client_name": "",
+                        "date_from": "",
+                        "date_to": "",
+                        "number_of_people": 0
                     },
                     "2024-09-02": {
-                        "status": "RESERVED",
-                        "client_name": "f",
-                        "date_from": "2024-09-02",
-                        "date_to": "2024-09-02",
-                        "number_of_people": 5
+                        "status": "AVAILABLE",
+                        "client_name": "",
+                        "date_from": "",
+                        "date_to": "",
+                        "number_of_people": 0
                     }
 
                 }
@@ -40,18 +40,18 @@ class TestMenu(unittest.TestCase):
                 "contact": "09486591743",
                 "availability": {
                     "2024-09-07": {
-                        "status": "reserved",
-                        "client_name": "Alice Johnson",
-                        "date_from": "2024-09-07",
-                        "date_to": "2024-09-09",
-                        "number_of_people": 3
+                        "status": "AVAILABLE",
+                        "client_name": "",
+                        "date_from": "",
+                        "date_to": "",
+                        "number_of_people": 0
                     },
                     "2024-09-08": {
-                        "status": "reserved",
-                        "client_name": "Alice Johnson",
-                        "date_from": "2024-09-07",
-                        "date_to": "2024-09-09",
-                        "number_of_people": 3
+                        "status": "AVAILABLE",
+                        "client_name": "",
+                        "date_from": "",
+                        "date_to": "",
+                        "number_of_people": 0
                     }
                 }
             }

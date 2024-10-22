@@ -6,7 +6,6 @@ def show_transient_table(transients):
     main_table.field_names = ["ID", "Name", "Address", "Price/Head", "Contact"]
 
     for transient in transients:
-        # print(transient)
 
         main_table.add_row(
             [transient["id"], transient["name"], transient["location"],

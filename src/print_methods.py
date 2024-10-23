@@ -1,4 +1,3 @@
-# Function to display the transient table
 from prettytable import PrettyTable
 
 def show_transient_table(transients):

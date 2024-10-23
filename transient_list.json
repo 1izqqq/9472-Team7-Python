@@ -57,11 +57,11 @@
                 "number_of_people": 3
             },
             "2024-09-08": {
-                "status": "available",
-                "client_name": "",
-                "date_from": "",
-                "date_to": "",
-                "number_of_people": 0
+                "status": "RESERVED",
+                "client_name": "fres",
+                "date_from": "2024-09-08",
+                "date_to": "2024-09-08",
+                "number_of_people": 1
             },
             "2024-09-09": {
                 "status": "available",

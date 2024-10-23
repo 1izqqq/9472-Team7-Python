@@ -4,7 +4,6 @@ import json
 import os
 from main import FileReader
 
-
 class TestFileReader(unittest.TestCase):
 
     def test_load_json_file_not_found(self):

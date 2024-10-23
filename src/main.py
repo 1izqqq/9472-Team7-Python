@@ -1,7 +1,7 @@
 import os
-import print_methods
-from menu import Menu
-from file_reader import FileReader
+from util.menu import Menu
+from util.file_reader import FileReader
+from util import printing_methods
 
 file_path = '../transient_list.json'
 
@@ -21,7 +21,7 @@ class Main:
         print("Where Every Stay Feels Like Home".center(terminal_width))
 
         # Show the table
-        print_methods.show_transient_table(self.transients)
+        printing_methods.show_transient_table(self.transients)
 
         menu = Menu(self.transients)
         menu.display_menu()

@@ -1,6 +1,6 @@
 from unittest import TestCase
 from unittest.mock import patch
-from reservation import reserve_dates
+from util.reservation import reserve_dates
 
 class TestReservation(TestCase):
     def setUp(self):

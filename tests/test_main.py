@@ -1,6 +1,7 @@
 import unittest
 from unittest.mock import patch
-from main import Main, FileReader
+from src.main import Main, FileReader
+from util import printing_methods
 
 class TestMain(unittest.TestCase):
 

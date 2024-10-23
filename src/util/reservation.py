@@ -1,11 +1,10 @@
 import re
-import print_methods
-
 from prettytable import PrettyTable
 from datetime import datetime, timedelta
-from file_reader import FileReader
+from util.file_reader import FileReader
+from util import printing_methods
 
-file_path = '../transient_list.json'
+file_path = 'transient_list.json'
 
 def show_available_dates(transient):
     print(f"Name: {transient['name']}")
@@ -83,7 +82,7 @@ def reserve_dates(transient, available_dates, transients):
                 price_per_head = transient["price_per_head"]
                 total_cost = number_of_people * price_per_head * num_nights
 
-                print_methods.show_reservation_details(client_name, date_from, date_to, pay_method, number_of_people, num_nights, price_per_head, total_cost)
+                printing_methods.show_reservation_details(client_name, date_from, date_to, pay_method, number_of_people, num_nights, price_per_head, total_cost)
 
                 confirm = input_confirm()
                 if confirm == "n":

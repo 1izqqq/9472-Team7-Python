@@ -2,7 +2,7 @@ import unittest
 from unittest.mock import patch
 from io import StringIO
 
-from print_methods import show_reservation_details, show_transient_table
+from util.printing_methods import show_reservation_details, show_transient_table
 
 class TestReservationFunctions(unittest.TestCase):
 

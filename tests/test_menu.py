@@ -1,6 +1,7 @@
 import unittest
 from unittest.mock import patch
-from menu import Menu
+from util.menu import Menu
+from util import printing_methods
 
 class TestMenu(unittest.TestCase):
     def setUp(self):
@@ -70,7 +71,7 @@ class TestMenu(unittest.TestCase):
     @patch('builtins.input', side_effect=['1'])  # Simulate user input
     @patch('reservation.show_available_dates', return_value=['2023-10-01', '2023-10-02'])
     @patch('reservation.reserve_dates')
-    @patch('print_methods.show_transient_table')
+    @patch('printing_methods.show_transient_table')
     def test_select_transient(self, mock_show_transient_table, mock_reserve_dates, mock_show_available_dates,
                               mock_input):
         mock_show_transient_table(self.transients)
@@ -80,7 +81,7 @@ class TestMenu(unittest.TestCase):
 
     @patch('builtins.input', side_effect=['1', '2'])  # Simulate sorting
     @patch('sort_filter.sort_transients_price')
-    @patch('print_methods.show_transient_table')
+    @patch('printing_methods.show_transient_table')
     def test_sort_transients(self, mock_show_transient_table, mock_sort_transients_price, mock_input):
         mock_sort_transients_price.return_value = self.transients
         self.menu.sort_transients('asc')

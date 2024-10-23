@@ -1,6 +1,6 @@
-import sort_filter
-import print_methods
-from reservation import show_available_dates, reserve_dates
+from util import sort_filter
+from util import printing_methods
+from util.reservation import show_available_dates, reserve_dates
 
 class Menu:
     def __init__(self, transients):
@@ -38,7 +38,7 @@ class Menu:
         exit(0)
 
     def select_transient(self):
-        print_methods.show_transient_table(self.transients)
+        printing_methods.show_transient_table(self.transients)
         user_input = input("Please input transient house's ID: ").strip()
         selected_transient = self.get_selected_transient(user_input)
 
@@ -86,10 +86,10 @@ class Menu:
 
     def sort_transients(self, order):
         sorted_transient = sort_filter.sort_transients_price(self.transients, order)
-        print_methods.show_transient_table(sorted_transient)
+        printing_methods.show_transient_table(sorted_transient)
 
     def show_unsorted_transients(self):
-        print_methods.show_transient_table(self.transients)
+        printing_methods.show_transient_table(self.transients)
 
     def back_to_main_menu(self):
         return
@@ -126,6 +126,6 @@ class Menu:
         filtered_transients = sort_filter.filter_transients(self.transients, choice_filter, filter_query)
 
         if filtered_transients:
-            print_methods.show_transient_table(filtered_transients)
+            printing_methods.show_transient_table(filtered_transients)
         else:
             print(f"\nNo transients found matching the query: {filter_query}")

@@ -1,3 +1,5 @@
+from util import printing_methods
+
 def sort_transients_price(transients, sort_choice):
     if sort_choice == "asc":
         return sorted(transients, key=lambda x: x["price_per_head"])

@@ -4,8 +4,6 @@ from datetime import datetime, timedelta
 from util.file_reader import FileReader
 from util import printing_methods
 
-file_path = 'transient_list.json'
-
 def show_available_dates(transient):
     print(f"Name: {transient['name']}")
     print(f"Description: {transient['description']}")
@@ -32,7 +30,7 @@ def show_available_dates(transient):
     print(available_dates_table)
     return set(available_dates)
 
-def reserve_dates(transient, available_dates, transients):
+def reserve_dates(transient, available_dates, transients, reservation_file='transient_list.json'):
     available_dates_list = list(available_dates)
     available_dates_list.sort()
     while True:
@@ -99,7 +97,7 @@ def reserve_dates(transient, available_dates, transients):
                     current_date += timedelta(days=1)
 
                 # Save the updated data back to the JSON file
-                FileReader.save_json(transients,file_path)
+                FileReader.save_json(transients,reservation_file)
 
                 confirmation_message = (
                     f"Reservation confirmed and saved.\n"

@@ -13,7 +13,7 @@ def show_available_dates(transient):
     print(f"Please check available dates for {transient['name']}:")
     print()
 
-    available_dates = [] # List holding available dates
+    available_dates = []
     available_dates_table = PrettyTable()
     available_dates_table.field_names = ["ID", "Dates", "Status"]
 
@@ -21,13 +21,11 @@ def show_available_dates(transient):
 
     for date, details in transient['availability'].items():
         status = details['status'].upper()
-        # Remove dates with "RESERVED" status
         if status != "RESERVED":
             index += 1
             available_dates_table.add_row([index, date, status])
             available_dates.append(date)
 
-    # Notify user if there are no available dates in a transient
     if len(available_dates) == 0:
         print("This transient has no available dates.")
         return None
@@ -78,7 +76,6 @@ def reserve_dates(transient, available_dates, transients):
                     print("Error: Some dates in the selected range are not available.")
                     continue
 
-                # Calculate the number of nights client will stay
                 num_nights = (end_date - start_date).days + 1
 
                 pay_method = input_pay_method()
@@ -86,14 +83,12 @@ def reserve_dates(transient, available_dates, transients):
                 price_per_head = transient["price_per_head"]
                 total_cost = number_of_people * price_per_head * num_nights
 
-                # Confirm reservation
                 print_methods.show_reservation_details(client_name, date_from, date_to, pay_method, number_of_people, num_nights, price_per_head, total_cost)
 
                 confirm = input_confirm()
                 if confirm == "n":
                     continue
 
-                # Update verified details on JSON
                 current_date = start_date
                 while current_date <= end_date:
                     date_key = current_date.strftime('%Y-%m-%d')
@@ -151,7 +146,6 @@ def input_name():
 
 def input_confirm():
     while True:
-        # Confirmation
         ans_input = input("Would you like to proceed? (y/n): ").strip().lower()
         if ans_input in ["y", "yes"]:
             return "y"
@@ -162,16 +156,19 @@ def input_confirm():
 
 def input_number_of_people():
     while True:
-        number_of_people = (input("Enter number of people: ").strip())
-        # Validates if input is integer
-        if number_of_people.isdigit():
-            number_of_people = int(number_of_people)
-            if number_of_people > 0:
-                return number_of_people
-            else:
-                print("Number of people must be greater than 0. Please try again.")
-        else:
-            print("Please enter a valid integer for number of people. Please try again.")
+        number_of_people = input("Enter number of people: ").strip()
+
+        if not number_of_people.isdigit():
+            print("Please enter a valid integer for the number of people. Please try again.")
+            continue
+
+        number_of_people = int(number_of_people)
+
+        if number_of_people <= 0:
+            print("Number of people must be greater than 0. Please try again.")
+            continue
+
+        return number_of_people
 
 def enter_choice(min_num, max_num, message):
     while True:

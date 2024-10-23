@@ -41,10 +41,16 @@ class Menu:
         print_methods.show_transient_table(self.transients)
         user_input = input("Please input transient house's ID: ").strip()
         selected_transient = self.get_selected_transient(user_input)
-        if selected_transient:
-            available_dates = show_available_dates(selected_transient)
-            if available_dates:
-                reserve_dates(selected_transient, available_dates, self.transients)
+
+        if not selected_transient:
+            return
+
+        available_dates = show_available_dates(selected_transient)
+
+        if not available_dates:
+            return
+
+        reserve_dates(selected_transient, available_dates, self.transients)
 
     def get_selected_transient(self, user_input):
         try:
@@ -112,11 +118,14 @@ class Menu:
 
     def apply_filter(self, choice_filter):
         filter_query = input("Enter your filter query: ").strip()
-        if filter_query:
-            filtered_transients = sort_filter.filter_transients(self.transients, choice_filter, filter_query)
-            if filtered_transients:
-                print_methods.show_transient_table(filtered_transients)
-            else:
-                print(f"\nNo transients found matching the query: {filter_query}")
-        else:
+
+        if not filter_query:
             print("Filter query cannot be empty.")
+            return
+
+        filtered_transients = sort_filter.filter_transients(self.transients, choice_filter, filter_query)
+
+        if filtered_transients:
+            print_methods.show_transient_table(filtered_transients)
+        else:
+            print(f"\nNo transients found matching the query: {filter_query}")

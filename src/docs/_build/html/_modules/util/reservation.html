@@ -1,0 +1,303 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>util.reservation &mdash; 9472-PythonTeam7 1.0.0. documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=58f5e731"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            9472-PythonTeam7
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">src</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">9472-PythonTeam7</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">util.reservation</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for util.reservation</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">prettytable</span> <span class="kn">import</span> <span class="n">PrettyTable</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+<span class="kn">from</span> <span class="nn">util.file_reader</span> <span class="kn">import</span> <span class="n">FileReader</span>
+<span class="kn">from</span> <span class="nn">util</span> <span class="kn">import</span> <span class="n">printing_methods</span>
+
+<span class="n">file_path</span> <span class="o">=</span> <span class="s1">&#39;transient_list.json&#39;</span>
+
+<div class="viewcode-block" id="show_available_dates">
+<a class="viewcode-back" href="../../util.html#util.reservation.show_available_dates">[docs]</a>
+<span class="k">def</span> <span class="nf">show_available_dates</span><span class="p">(</span><span class="n">transient</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Name: </span><span class="si">{</span><span class="n">transient</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Description: </span><span class="si">{</span><span class="n">transient</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Please check available dates for </span><span class="si">{</span><span class="n">transient</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+
+    <span class="n">available_dates</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">available_dates_table</span> <span class="o">=</span> <span class="n">PrettyTable</span><span class="p">()</span>
+    <span class="n">available_dates_table</span><span class="o">.</span><span class="n">field_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;ID&quot;</span><span class="p">,</span> <span class="s2">&quot;Dates&quot;</span><span class="p">,</span> <span class="s2">&quot;Status&quot;</span><span class="p">]</span>
+
+    <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">date</span><span class="p">,</span> <span class="n">details</span> <span class="ow">in</span> <span class="n">transient</span><span class="p">[</span><span class="s1">&#39;availability&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="n">details</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">status</span> <span class="o">!=</span> <span class="s2">&quot;RESERVED&quot;</span><span class="p">:</span>
+            <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">available_dates_table</span><span class="o">.</span><span class="n">add_row</span><span class="p">([</span><span class="n">index</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="n">status</span><span class="p">])</span>
+            <span class="n">available_dates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">date</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">available_dates</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This transient has no available dates.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">available_dates_table</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="n">available_dates</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="reserve_dates">
+<a class="viewcode-back" href="../../util.html#util.reservation.reserve_dates">[docs]</a>
+<span class="k">def</span> <span class="nf">reserve_dates</span><span class="p">(</span><span class="n">transient</span><span class="p">,</span> <span class="n">available_dates</span><span class="p">,</span> <span class="n">transients</span><span class="p">):</span>
+    <span class="n">available_dates_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">available_dates</span><span class="p">)</span>
+    <span class="n">available_dates_list</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">ans_input</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Would you like to reserve? (y/n) &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">ans_input</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="s2">&quot;yes&quot;</span><span class="p">]:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">()</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Reservation Form&quot;</span><span class="p">)</span>
+
+                <span class="n">client_name</span> <span class="o">=</span> <span class="n">input_name</span><span class="p">()</span>
+
+                <span class="n">date_from</span> <span class="o">=</span> <span class="n">available_dates_list</span><span class="p">[</span><span class="n">enter_choice</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">available_dates_list</span><span class="p">),</span> <span class="s2">&quot;Enter ID to select reservation start date: &quot;</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+                <span class="n">date_to</span> <span class="o">=</span> <span class="n">available_dates_list</span><span class="p">[</span><span class="n">enter_choice</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">available_dates_list</span><span class="p">),</span> <span class="s2">&quot;Enter ID to select reservation end date: &quot;</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+
+                <span class="n">number_of_people</span> <span class="o">=</span> <span class="n">input_number_of_people</span><span class="p">()</span>
+
+                <span class="c1"># Validate date format</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">start_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">date_from</span><span class="p">,</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span>
+                    <span class="n">end_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">date_to</span><span class="p">,</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Invalid date format. Please use YYYY-MM-DD.&quot;</span><span class="p">)</span>
+                    <span class="k">continue</span>
+
+                <span class="c1"># Validate date range</span>
+                <span class="k">if</span> <span class="n">start_date</span> <span class="o">&gt;</span> <span class="n">end_date</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error: Start date must be before or equal to end date.&quot;</span><span class="p">)</span>
+                    <span class="k">continue</span>
+
+                <span class="c1"># Check if all dates in the range are available</span>
+                <span class="n">all_dates_available</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="n">current_date</span> <span class="o">=</span> <span class="n">start_date</span>
+                <span class="k">while</span> <span class="n">current_date</span> <span class="o">&lt;=</span> <span class="n">end_date</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">current_date</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">available_dates</span><span class="p">:</span>
+                        <span class="n">all_dates_available</span> <span class="o">=</span> <span class="kc">False</span>
+                        <span class="k">break</span>
+                    <span class="n">current_date</span> <span class="o">+=</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">all_dates_available</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error: Some dates in the selected range are not available.&quot;</span><span class="p">)</span>
+                    <span class="k">continue</span>
+
+                <span class="n">num_nights</span> <span class="o">=</span> <span class="p">(</span><span class="n">end_date</span> <span class="o">-</span> <span class="n">start_date</span><span class="p">)</span><span class="o">.</span><span class="n">days</span> <span class="o">+</span> <span class="mi">1</span>
+
+                <span class="n">pay_method</span> <span class="o">=</span> <span class="n">input_pay_method</span><span class="p">()</span>
+
+                <span class="n">price_per_head</span> <span class="o">=</span> <span class="n">transient</span><span class="p">[</span><span class="s2">&quot;price_per_head&quot;</span><span class="p">]</span>
+                <span class="n">total_cost</span> <span class="o">=</span> <span class="n">number_of_people</span> <span class="o">*</span> <span class="n">price_per_head</span> <span class="o">*</span> <span class="n">num_nights</span>
+
+                <span class="n">printing_methods</span><span class="o">.</span><span class="n">show_reservation_details</span><span class="p">(</span><span class="n">client_name</span><span class="p">,</span> <span class="n">date_from</span><span class="p">,</span> <span class="n">date_to</span><span class="p">,</span> <span class="n">pay_method</span><span class="p">,</span> <span class="n">number_of_people</span><span class="p">,</span> <span class="n">num_nights</span><span class="p">,</span> <span class="n">price_per_head</span><span class="p">,</span> <span class="n">total_cost</span><span class="p">)</span>
+
+                <span class="n">confirm</span> <span class="o">=</span> <span class="n">input_confirm</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">confirm</span> <span class="o">==</span> <span class="s2">&quot;n&quot;</span><span class="p">:</span>
+                    <span class="k">continue</span>
+
+                <span class="n">current_date</span> <span class="o">=</span> <span class="n">start_date</span>
+                <span class="k">while</span> <span class="n">current_date</span> <span class="o">&lt;=</span> <span class="n">end_date</span><span class="p">:</span>
+                    <span class="n">date_key</span> <span class="o">=</span> <span class="n">current_date</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span>
+                    <span class="n">transient</span><span class="p">[</span><span class="s1">&#39;availability&#39;</span><span class="p">][</span><span class="n">date_key</span><span class="p">][</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;RESERVED&quot;</span>
+                    <span class="n">transient</span><span class="p">[</span><span class="s1">&#39;availability&#39;</span><span class="p">][</span><span class="n">date_key</span><span class="p">][</span><span class="s1">&#39;client_name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">client_name</span>
+                    <span class="n">transient</span><span class="p">[</span><span class="s1">&#39;availability&#39;</span><span class="p">][</span><span class="n">date_key</span><span class="p">][</span><span class="s1">&#39;date_from&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">date_from</span>
+                    <span class="n">transient</span><span class="p">[</span><span class="s1">&#39;availability&#39;</span><span class="p">][</span><span class="n">date_key</span><span class="p">][</span><span class="s1">&#39;date_to&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">date_to</span>
+                    <span class="n">transient</span><span class="p">[</span><span class="s1">&#39;availability&#39;</span><span class="p">][</span><span class="n">date_key</span><span class="p">][</span><span class="s1">&#39;number_of_people&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">number_of_people</span>
+                    <span class="n">current_date</span> <span class="o">+=</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+                <span class="c1"># Save the updated data back to the JSON file</span>
+                <span class="n">FileReader</span><span class="o">.</span><span class="n">save_json</span><span class="p">(</span><span class="n">transients</span><span class="p">,</span><span class="n">file_path</span><span class="p">)</span>
+
+                <span class="n">confirmation_message</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Reservation confirmed and saved.</span><span class="se">\n</span><span class="s2">&quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;Dear Mr./Ms. </span><span class="si">{</span><span class="n">client_name</span><span class="si">}</span><span class="s2">, please proceed to </span><span class="si">{</span><span class="n">transient</span><span class="p">[</span><span class="s1">&#39;location&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> on </span><span class="si">{</span><span class="n">date_from</span><span class="si">}</span><span class="s2"> and enjoy your stay until </span><span class="si">{</span><span class="n">date_to</span><span class="si">}</span><span class="s2">.</span><span class="se">\n</span><span class="s2">&quot;</span>
+                    <span class="s2">&quot;Thank you for trusting The Cozy Cabin.&quot;</span>
+                <span class="p">)</span>
+
+                <span class="nb">print</span><span class="p">()</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">confirmation_message</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">confirmation_message</span>
+
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Invalid input. Please enter the number of people as an integer.&quot;</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">ans_input</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;n&quot;</span><span class="p">,</span> <span class="s2">&quot;no&quot;</span><span class="p">]:</span>
+            <span class="nb">print</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Returning to main menu.&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Invalid input. Please enter yes/no or y/n.&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="input_pay_method">
+<a class="viewcode-back" href="../../util.html#util.reservation.input_pay_method">[docs]</a>
+<span class="k">def</span> <span class="nf">input_pay_method</span><span class="p">():</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Available Payment Methods&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;1. GCASH&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;2. PayMaya&quot;</span><span class="p">)</span>
+        <span class="n">pay_method</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Select a payment method: &quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">pay_method</span> <span class="o">==</span> <span class="s2">&quot;1&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;GCASH&quot;</span>
+        <span class="k">elif</span> <span class="n">pay_method</span> <span class="o">==</span> <span class="s2">&quot;2&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;PayMaya&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Invalid! Please select one of the options.&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="input_name">
+<a class="viewcode-back" href="../../util.html#util.reservation.input_name">[docs]</a>
+<span class="k">def</span> <span class="nf">input_name</span><span class="p">():</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">client_name</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter client name: &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="c1"># Client name must not contain any integer</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s2">&quot;^[A-Za-z</span><span class="se">\\</span><span class="s2">s</span><span class="se">\\</span><span class="s2">-]+$&quot;</span><span class="p">,</span> <span class="n">client_name</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Invalid name! Client name should not contain numbers or special characters. Please try again.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">client_name</span></div>
+
+
+<div class="viewcode-block" id="input_confirm">
+<a class="viewcode-back" href="../../util.html#util.reservation.input_confirm">[docs]</a>
+<span class="k">def</span> <span class="nf">input_confirm</span><span class="p">():</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">ans_input</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Would you like to proceed? (y/n): &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">ans_input</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="s2">&quot;yes&quot;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="s2">&quot;y&quot;</span>
+        <span class="k">elif</span> <span class="n">ans_input</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;n&quot;</span><span class="p">,</span> <span class="s2">&quot;no&quot;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="s2">&quot;n&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Invalid input. Please enter yes/no or y/n.&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="input_number_of_people">
+<a class="viewcode-back" href="../../util.html#util.reservation.input_number_of_people">[docs]</a>
+<span class="k">def</span> <span class="nf">input_number_of_people</span><span class="p">():</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">number_of_people</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter number of people: &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">number_of_people</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Please enter a valid integer for the number of people. Please try again.&quot;</span><span class="p">)</span>
+            <span class="k">continue</span>
+
+        <span class="n">number_of_people</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">number_of_people</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">number_of_people</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of people must be greater than 0. Please try again.&quot;</span><span class="p">)</span>
+            <span class="k">continue</span>
+
+        <span class="k">return</span> <span class="n">number_of_people</span></div>
+
+
+<div class="viewcode-block" id="enter_choice">
+<a class="viewcode-back" href="../../util.html#util.reservation.enter_choice">[docs]</a>
+<span class="k">def</span> <span class="nf">enter_choice</span><span class="p">(</span><span class="n">min_num</span><span class="p">,</span> <span class="n">max_num</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">choice</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="n">message</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">choice</span> <span class="o">&lt;</span> <span class="n">min_num</span> <span class="ow">or</span> <span class="n">choice</span> <span class="o">&gt;</span> <span class="n">max_num</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Invalid Input. Please enter a number from &quot;</span><span class="p">,</span><span class="n">min_num</span><span class="p">,</span> <span class="s2">&quot;to&quot;</span><span class="p">,</span> <span class="n">max_num</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">choice</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Invalid Input. Please enter a valid number.&quot;</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Liza.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

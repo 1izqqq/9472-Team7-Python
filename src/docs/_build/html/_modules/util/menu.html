@@ -1,0 +1,277 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>util.menu &mdash; 9472-PythonTeam7 1.0.0. documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=58f5e731"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            9472-PythonTeam7
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">src</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">9472-PythonTeam7</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">util.menu</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for util.menu</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">util</span> <span class="kn">import</span> <span class="n">sort_filter</span>
+<span class="kn">from</span> <span class="nn">util</span> <span class="kn">import</span> <span class="n">printing_methods</span>
+<span class="kn">from</span> <span class="nn">util.reservation</span> <span class="kn">import</span> <span class="n">show_available_dates</span><span class="p">,</span> <span class="n">reserve_dates</span>
+
+<div class="viewcode-block" id="Menu">
+<a class="viewcode-back" href="../../util.html#util.menu.Menu">[docs]</a>
+<span class="k">class</span> <span class="nc">Menu</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transients</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transients</span> <span class="o">=</span> <span class="n">transients</span>
+
+<div class="viewcode-block" id="Menu.display_menu">
+<a class="viewcode-back" href="../../util.html#util.menu.Menu.display_menu">[docs]</a>
+    <span class="k">def</span> <span class="nf">display_menu</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">menu_actions</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="mi">1</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">select_transient</span><span class="p">,</span>
+            <span class="mi">2</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">sort_menu</span><span class="p">,</span>
+            <span class="mi">3</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_menu</span><span class="p">,</span>
+            <span class="mi">4</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">exit_program</span>
+        <span class="p">}</span>
+
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_main_menu</span><span class="p">()</span>
+            <span class="n">choice</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">enter_choice</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;Enter a number from the menu: &quot;</span><span class="p">)</span>
+            <span class="n">action</span> <span class="o">=</span> <span class="n">menu_actions</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">choice</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">action</span><span class="p">:</span>
+                <span class="n">action</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Invalid choice. Please try again.&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Menu.enter_choice">
+<a class="viewcode-back" href="../../util.html#util.menu.Menu.enter_choice">[docs]</a>
+    <span class="k">def</span> <span class="nf">enter_choice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">min_choice</span><span class="p">,</span> <span class="n">max_choice</span><span class="p">,</span> <span class="n">prompt</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">reservation</span> <span class="kn">import</span> <span class="n">enter_choice</span>  <span class="c1"># Import moved inside the method</span>
+        <span class="k">return</span> <span class="n">enter_choice</span><span class="p">(</span><span class="n">min_choice</span><span class="p">,</span> <span class="n">max_choice</span><span class="p">,</span> <span class="n">prompt</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Menu.print_main_menu">
+<a class="viewcode-back" href="../../util.html#util.menu.Menu.print_main_menu">[docs]</a>
+    <span class="k">def</span> <span class="nf">print_main_menu</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Main Menu&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;1. Select transient to book&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;2. Sort transient list&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;3. Filter transient list&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;4. Exit Cozy Cabin&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Menu.exit_program">
+<a class="viewcode-back" href="../../util.html#util.menu.Menu.exit_program">[docs]</a>
+    <span class="k">def</span> <span class="nf">exit_program</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Menu.select_transient">
+<a class="viewcode-back" href="../../util.html#util.menu.Menu.select_transient">[docs]</a>
+    <span class="k">def</span> <span class="nf">select_transient</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">printing_methods</span><span class="o">.</span><span class="n">show_transient_table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">transients</span><span class="p">)</span>
+        <span class="n">user_input</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Please input transient house&#39;s ID: &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="n">selected_transient</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_selected_transient</span><span class="p">(</span><span class="n">user_input</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">selected_transient</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="n">available_dates</span> <span class="o">=</span> <span class="n">show_available_dates</span><span class="p">(</span><span class="n">selected_transient</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">available_dates</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="n">reserve_dates</span><span class="p">(</span><span class="n">selected_transient</span><span class="p">,</span> <span class="n">available_dates</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">transients</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Menu.get_selected_transient">
+<a class="viewcode-back" href="../../util.html#util.menu.Menu.get_selected_transient">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_selected_transient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_input</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">option</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">user_input</span><span class="p">)</span>
+            <span class="k">return</span> <span class="nb">next</span><span class="p">((</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">transients</span> <span class="k">if</span> <span class="n">t</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">option</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Invalid input. Please enter a number.&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="Menu.sort_menu">
+<a class="viewcode-back" href="../../util.html#util.menu.Menu.sort_menu">[docs]</a>
+    <span class="k">def</span> <span class="nf">sort_menu</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">sort_actions</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="mi">1</span><span class="p">:</span> <span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">sort_transients</span><span class="p">(</span><span class="s2">&quot;asc&quot;</span><span class="p">),</span>
+            <span class="mi">2</span><span class="p">:</span> <span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">sort_transients</span><span class="p">(</span><span class="s2">&quot;desc&quot;</span><span class="p">),</span>
+            <span class="mi">3</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">show_unsorted_transients</span><span class="p">,</span>
+            <span class="mi">4</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">back_to_main_menu</span>
+        <span class="p">}</span>
+
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_sort_menu</span><span class="p">()</span>
+            <span class="n">choice_sort</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">enter_choice</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;Enter a number from the menu: &quot;</span><span class="p">)</span>
+            <span class="n">action</span> <span class="o">=</span> <span class="n">sort_actions</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">choice_sort</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">action</span><span class="p">:</span>
+                <span class="n">action</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Invalid choice. Please try again.&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Menu.print_sort_menu">
+<a class="viewcode-back" href="../../util.html#util.menu.Menu.print_sort_menu">[docs]</a>
+    <span class="k">def</span> <span class="nf">print_sort_menu</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Sort&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;1. Sort by price in ascending order&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;2. Sort by price in descending order&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;3. Sort by ID&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;4. Go back to Main Menu&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Menu.sort_transients">
+<a class="viewcode-back" href="../../util.html#util.menu.Menu.sort_transients">[docs]</a>
+    <span class="k">def</span> <span class="nf">sort_transients</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
+        <span class="n">sorted_transient</span> <span class="o">=</span> <span class="n">sort_filter</span><span class="o">.</span><span class="n">sort_transients_price</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">transients</span><span class="p">,</span> <span class="n">order</span><span class="p">)</span>
+        <span class="n">printing_methods</span><span class="o">.</span><span class="n">show_transient_table</span><span class="p">(</span><span class="n">sorted_transient</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Menu.show_unsorted_transients">
+<a class="viewcode-back" href="../../util.html#util.menu.Menu.show_unsorted_transients">[docs]</a>
+    <span class="k">def</span> <span class="nf">show_unsorted_transients</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">printing_methods</span><span class="o">.</span><span class="n">show_transient_table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">transients</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Menu.back_to_main_menu">
+<a class="viewcode-back" href="../../util.html#util.menu.Menu.back_to_main_menu">[docs]</a>
+    <span class="k">def</span> <span class="nf">back_to_main_menu</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="Menu.filter_menu">
+<a class="viewcode-back" href="../../util.html#util.menu.Menu.filter_menu">[docs]</a>
+    <span class="k">def</span> <span class="nf">filter_menu</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">filter_actions</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="mi">1</span><span class="p">:</span> <span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply_filter</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+            <span class="mi">2</span><span class="p">:</span> <span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply_filter</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+            <span class="mi">3</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">back_to_main_menu</span>
+        <span class="p">}</span>
+
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_filter_menu</span><span class="p">()</span>
+            <span class="n">choice_filter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">enter_choice</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;Enter a number from the menu: &quot;</span><span class="p">)</span>
+            <span class="n">action</span> <span class="o">=</span> <span class="n">filter_actions</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">choice_filter</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">action</span><span class="p">:</span>
+                <span class="n">action</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Invalid choice. Please try again.&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Menu.print_filter_menu">
+<a class="viewcode-back" href="../../util.html#util.menu.Menu.print_filter_menu">[docs]</a>
+    <span class="k">def</span> <span class="nf">print_filter_menu</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Filter&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;1. Filter by transient name&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;2. Filter by address&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;3. Go back to Main Menu&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Menu.apply_filter">
+<a class="viewcode-back" href="../../util.html#util.menu.Menu.apply_filter">[docs]</a>
+    <span class="k">def</span> <span class="nf">apply_filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">choice_filter</span><span class="p">):</span>
+        <span class="n">filter_query</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter your filter query: &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">filter_query</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Filter query cannot be empty.&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="n">filtered_transients</span> <span class="o">=</span> <span class="n">sort_filter</span><span class="o">.</span><span class="n">filter_transients</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">transients</span><span class="p">,</span> <span class="n">choice_filter</span><span class="p">,</span> <span class="n">filter_query</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">filtered_transients</span><span class="p">:</span>
+            <span class="n">printing_methods</span><span class="o">.</span><span class="n">show_transient_table</span><span class="p">(</span><span class="n">filtered_transients</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">No transients found matching the query: </span><span class="si">{</span><span class="n">filter_query</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Liza.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

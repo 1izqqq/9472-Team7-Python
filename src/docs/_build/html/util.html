@@ -1,0 +1,312 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>util package &mdash; 9472-PythonTeam7 1.0.0. documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=58f5e731"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="main module" href="main.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            9472-PythonTeam7
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">src</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="main.html">main module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">util package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-util.file_reader">util.file_reader module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#util.file_reader.FileReader"><code class="docutils literal notranslate"><span class="pre">FileReader</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-util.menu">util.menu module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#util.menu.Menu"><code class="docutils literal notranslate"><span class="pre">Menu</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-util.printing_methods">util.printing_methods module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#util.printing_methods.show_reservation_details"><code class="docutils literal notranslate"><span class="pre">show_reservation_details()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#util.printing_methods.show_transient_table"><code class="docutils literal notranslate"><span class="pre">show_transient_table()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-util.reservation">util.reservation module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#util.reservation.enter_choice"><code class="docutils literal notranslate"><span class="pre">enter_choice()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#util.reservation.input_confirm"><code class="docutils literal notranslate"><span class="pre">input_confirm()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#util.reservation.input_name"><code class="docutils literal notranslate"><span class="pre">input_name()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#util.reservation.input_number_of_people"><code class="docutils literal notranslate"><span class="pre">input_number_of_people()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#util.reservation.input_pay_method"><code class="docutils literal notranslate"><span class="pre">input_pay_method()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#util.reservation.reserve_dates"><code class="docutils literal notranslate"><span class="pre">reserve_dates()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#util.reservation.show_available_dates"><code class="docutils literal notranslate"><span class="pre">show_available_dates()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-util.sort_filter">util.sort_filter module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#util.sort_filter.filter_transients"><code class="docutils literal notranslate"><span class="pre">filter_transients()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#util.sort_filter.sort_transients_price"><code class="docutils literal notranslate"><span class="pre">sort_transients_price()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-util">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">9472-PythonTeam7</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">src</a></li>
+      <li class="breadcrumb-item active">util package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/util.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="util-package">
+<h1>util package<a class="headerlink" href="#util-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-util.file_reader">
+<span id="util-file-reader-module"></span><h2>util.file_reader module<a class="headerlink" href="#module-util.file_reader" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="util.file_reader.FileReader">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">util.file_reader.</span></span><span class="sig-name descname"><span class="pre">FileReader</span></span><a class="reference internal" href="_modules/util/file_reader.html#FileReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#util.file_reader.FileReader" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="util.file_reader.FileReader.load_json">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/util/file_reader.html#FileReader.load_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#util.file_reader.FileReader.load_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="util.file_reader.FileReader.save_json">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">save_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transients</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/util/file_reader.html#FileReader.save_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#util.file_reader.FileReader.save_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-util.menu">
+<span id="util-menu-module"></span><h2>util.menu module<a class="headerlink" href="#module-util.menu" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="util.menu.Menu">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">util.menu.</span></span><span class="sig-name descname"><span class="pre">Menu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transients</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/util/menu.html#Menu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#util.menu.Menu" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="util.menu.Menu.apply_filter">
+<span class="sig-name descname"><span class="pre">apply_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">choice_filter</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/util/menu.html#Menu.apply_filter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#util.menu.Menu.apply_filter" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="util.menu.Menu.back_to_main_menu">
+<span class="sig-name descname"><span class="pre">back_to_main_menu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/util/menu.html#Menu.back_to_main_menu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#util.menu.Menu.back_to_main_menu" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="util.menu.Menu.display_menu">
+<span class="sig-name descname"><span class="pre">display_menu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/util/menu.html#Menu.display_menu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#util.menu.Menu.display_menu" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="util.menu.Menu.enter_choice">
+<span class="sig-name descname"><span class="pre">enter_choice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">min_choice</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_choice</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prompt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/util/menu.html#Menu.enter_choice"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#util.menu.Menu.enter_choice" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="util.menu.Menu.exit_program">
+<span class="sig-name descname"><span class="pre">exit_program</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/util/menu.html#Menu.exit_program"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#util.menu.Menu.exit_program" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="util.menu.Menu.filter_menu">
+<span class="sig-name descname"><span class="pre">filter_menu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/util/menu.html#Menu.filter_menu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#util.menu.Menu.filter_menu" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="util.menu.Menu.get_selected_transient">
+<span class="sig-name descname"><span class="pre">get_selected_transient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_input</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/util/menu.html#Menu.get_selected_transient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#util.menu.Menu.get_selected_transient" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="util.menu.Menu.print_filter_menu">
+<span class="sig-name descname"><span class="pre">print_filter_menu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/util/menu.html#Menu.print_filter_menu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#util.menu.Menu.print_filter_menu" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="util.menu.Menu.print_main_menu">
+<span class="sig-name descname"><span class="pre">print_main_menu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/util/menu.html#Menu.print_main_menu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#util.menu.Menu.print_main_menu" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="util.menu.Menu.print_sort_menu">
+<span class="sig-name descname"><span class="pre">print_sort_menu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/util/menu.html#Menu.print_sort_menu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#util.menu.Menu.print_sort_menu" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="util.menu.Menu.select_transient">
+<span class="sig-name descname"><span class="pre">select_transient</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/util/menu.html#Menu.select_transient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#util.menu.Menu.select_transient" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="util.menu.Menu.show_unsorted_transients">
+<span class="sig-name descname"><span class="pre">show_unsorted_transients</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/util/menu.html#Menu.show_unsorted_transients"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#util.menu.Menu.show_unsorted_transients" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="util.menu.Menu.sort_menu">
+<span class="sig-name descname"><span class="pre">sort_menu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/util/menu.html#Menu.sort_menu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#util.menu.Menu.sort_menu" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="util.menu.Menu.sort_transients">
+<span class="sig-name descname"><span class="pre">sort_transients</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">order</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/util/menu.html#Menu.sort_transients"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#util.menu.Menu.sort_transients" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-util.printing_methods">
+<span id="util-printing-methods-module"></span><h2>util.printing_methods module<a class="headerlink" href="#module-util.printing_methods" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="util.printing_methods.show_reservation_details">
+<span class="sig-prename descclassname"><span class="pre">util.printing_methods.</span></span><span class="sig-name descname"><span class="pre">show_reservation_details</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date_from</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date_to</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pay_method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_people</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_nights</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price_per_head</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">total_cost</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/util/printing_methods.html#show_reservation_details"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#util.printing_methods.show_reservation_details" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="util.printing_methods.show_transient_table">
+<span class="sig-prename descclassname"><span class="pre">util.printing_methods.</span></span><span class="sig-name descname"><span class="pre">show_transient_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transients</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/util/printing_methods.html#show_transient_table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#util.printing_methods.show_transient_table" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-util.reservation">
+<span id="util-reservation-module"></span><h2>util.reservation module<a class="headerlink" href="#module-util.reservation" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="util.reservation.enter_choice">
+<span class="sig-prename descclassname"><span class="pre">util.reservation.</span></span><span class="sig-name descname"><span class="pre">enter_choice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">min_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/util/reservation.html#enter_choice"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#util.reservation.enter_choice" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="util.reservation.input_confirm">
+<span class="sig-prename descclassname"><span class="pre">util.reservation.</span></span><span class="sig-name descname"><span class="pre">input_confirm</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/util/reservation.html#input_confirm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#util.reservation.input_confirm" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="util.reservation.input_name">
+<span class="sig-prename descclassname"><span class="pre">util.reservation.</span></span><span class="sig-name descname"><span class="pre">input_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/util/reservation.html#input_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#util.reservation.input_name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="util.reservation.input_number_of_people">
+<span class="sig-prename descclassname"><span class="pre">util.reservation.</span></span><span class="sig-name descname"><span class="pre">input_number_of_people</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/util/reservation.html#input_number_of_people"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#util.reservation.input_number_of_people" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="util.reservation.input_pay_method">
+<span class="sig-prename descclassname"><span class="pre">util.reservation.</span></span><span class="sig-name descname"><span class="pre">input_pay_method</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/util/reservation.html#input_pay_method"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#util.reservation.input_pay_method" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="util.reservation.reserve_dates">
+<span class="sig-prename descclassname"><span class="pre">util.reservation.</span></span><span class="sig-name descname"><span class="pre">reserve_dates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transient</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">available_dates</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transients</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/util/reservation.html#reserve_dates"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#util.reservation.reserve_dates" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="util.reservation.show_available_dates">
+<span class="sig-prename descclassname"><span class="pre">util.reservation.</span></span><span class="sig-name descname"><span class="pre">show_available_dates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transient</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/util/reservation.html#show_available_dates"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#util.reservation.show_available_dates" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-util.sort_filter">
+<span id="util-sort-filter-module"></span><h2>util.sort_filter module<a class="headerlink" href="#module-util.sort_filter" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="util.sort_filter.filter_transients">
+<span class="sig-prename descclassname"><span class="pre">util.sort_filter.</span></span><span class="sig-name descname"><span class="pre">filter_transients</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transients</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_choice</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_query</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/util/sort_filter.html#filter_transients"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#util.sort_filter.filter_transients" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="util.sort_filter.sort_transients_price">
+<span class="sig-prename descclassname"><span class="pre">util.sort_filter.</span></span><span class="sig-name descname"><span class="pre">sort_transients_price</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transients</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort_choice</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/util/sort_filter.html#sort_transients_price"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#util.sort_filter.sort_transients_price" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-util">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-util" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="main.html" class="btn btn-neutral float-left" title="main module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Liza.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

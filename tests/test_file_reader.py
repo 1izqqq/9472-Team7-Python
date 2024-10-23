@@ -18,7 +18,7 @@ class TestFileReader(unittest.TestCase):
 
     def test_load_json_success(self):
         # Use the test JSON file for loading
-        with open(os.path.join(os.path.dirname(__file__), 'test_transient_list.json')) as f:
+        with open(os.path.join(os.path.dirname(__file__), 'transient_list.json')) as f:
             mock_data = json.load(f)
 
         with patch('builtins.open', mock_open(read_data=json.dumps(mock_data))):

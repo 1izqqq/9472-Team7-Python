@@ -92,7 +92,6 @@ def reserve_dates(transient, available_dates, transients, reservation_file='tran
                     transient['availability'][date_key]['status'] = "RESERVED"
                     transient['availability'][date_key]['client_name'] = client_name
                     transient['availability'][date_key]['date_from'] = date_from
-
                     transient['availability'][date_key]['date_to'] = date_to
                     transient['availability'][date_key]['number_of_people'] = number_of_people
                     current_date += timedelta(days=1)

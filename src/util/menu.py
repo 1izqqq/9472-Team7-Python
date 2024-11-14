@@ -4,9 +4,19 @@ from util.reservation import show_available_dates, reserve_dates
 
 class Menu:
     def __init__(self, transients):
+        """Initialize the Menu with a list of transients.
+
+        :param transients:
+        """
         self.transients = transients
 
     def display_menu(self):
+        """Display the main menu and handle user choices.
+
+        This method will loop indefinitely until the user chooses to exit.
+
+        :return:
+        """
         menu_actions = {
             1: self.select_transient,
             2: self.sort_menu,
@@ -38,6 +48,14 @@ class Menu:
         exit(0)
 
     def select_transient(self):
+        """
+        Allow the user to select a transient to book.
+
+        This method displays the transient table and prompts the user to enter a transient ID.
+        It handles the booking process if the ID is valid.
+
+        :return:
+        """
         printing_methods.show_transient_table(self.transients)
         user_input = input("Please input transient house's ID: ").strip()
         selected_transient = self.get_selected_transient(user_input)
@@ -61,6 +79,13 @@ class Menu:
             return None
 
     def sort_menu(self):
+        """Display the sorting options for the transient list.
+
+        This method allows the user to sort the transients by price or ID.
+        It returns to the main menu when the user is done.
+
+        :return:
+        """
         sort_actions = {
             1: lambda: self.sort_transients("asc"),
             2: lambda: self.sort_transients("desc"),
@@ -95,6 +120,13 @@ class Menu:
         return
 
     def filter_menu(self):
+        """Display the filtering options for the transient list.
+
+        This method allows the user to filter transients by name or address.
+        It returns to the main menu when the user is done.
+
+        :return:
+        """
         filter_actions = {
             1: lambda: self.apply_filter(1),
             2: lambda: self.apply_filter(2),

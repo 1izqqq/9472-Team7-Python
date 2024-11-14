@@ -1,6 +1,11 @@
 from prettytable import PrettyTable
 
 def show_transient_table(transients):
+    """Display a table of transients.
+
+    :param transients:
+    :return:
+    """
     main_table = PrettyTable()
     main_table.field_names = ["ID", "Name", "Address", "Price/Head", "Contact"]
 
@@ -13,6 +18,18 @@ def show_transient_table(transients):
     print(main_table)
 
 def show_reservation_details(client_name, date_from, date_to, pay_method, number_of_people, num_nights, price_per_head, total_cost):
+    """Display the details of a reservation.
+
+    :param client_name:
+    :param date_from:
+    :param date_to:
+    :param pay_method:
+    :param number_of_people:
+    :param num_nights:
+    :param price_per_head:
+    :param total_cost:
+    :return:
+    """
     print()
     print("Reservation Details")
     print(f"Client Name: {client_name}")

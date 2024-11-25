@@ -4,16 +4,25 @@ from io import StringIO
 
 from util.printing_methods import show_reservation_details, show_transient_table
 
+
 class TestReservationFunctions(unittest.TestCase):
 
     def setUp(self):
         self.transients = [
-            {"id": 1, "name": "Cozy Cabin", "location": "123 Mountain Road",
-             "price_per_head": 100,
-             "contact": "09123456789"},
-            {"id": 2, "name": "Seaside Villa", "location": "456 Ocean Drive",
-             "price_per_head": 150,
-             "contact": "09876543210"}
+            {
+                "id": 1,
+                "name": "Cozy Cabin",
+                "location": "123 Mountain Road",
+                "price_per_head": 100,
+                "contact": "09123456789",
+            },
+            {
+                "id": 2,
+                "name": "Seaside Villa",
+                "location": "456 Ocean Drive",
+                "price_per_head": 150,
+                "contact": "09876543210",
+            },
         ]
 
     @patch('sys.stdout', new_callable=StringIO)
@@ -42,7 +51,7 @@ class TestReservationFunctions(unittest.TestCase):
             "number_of_people": 2,
             "num_nights": 2,
             "price_per_head": 100,
-            "total_cost": 400
+            "total_cost": 400,
         }
 
         show_reservation_details(**details)
@@ -63,6 +72,7 @@ class TestReservationFunctions(unittest.TestCase):
         ).strip()
 
         self.assertEqual(output, expected_output)
+
 
 if __name__ == '__main__':
     unittest.main()

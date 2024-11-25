@@ -9,20 +9,20 @@ class TestSortFilter(unittest.TestCase):
                 "id": 1,
                 "name": "Cozy Cabin",
                 "location": "123 Mountain Road",
-                "price_per_head": 100
+                "price_per_head": 100,
             },
             {
                 "id": 2,
                 "name": "Seaside Villa",
                 "location": "456 Ocean Drive",
-                "price_per_head": 150
+                "price_per_head": 150,
             },
             {
                 "id": 3,
                 "name": "Mountain Retreat",
                 "location": "789 Hilltop Lane",
-                "price_per_head": 120
-            }
+                "price_per_head": 120,
+            },
         ]
 
     def test_sort_transients_price_ascending(self):
@@ -48,14 +48,13 @@ class TestSortFilter(unittest.TestCase):
         self.assertEqual(filtered_transients[0]["name"], "Seaside Villa")
 
     def test_filter_transients_no_match(self):
-        filtered_transients = filter_transients(self.transients, 1,
-                                                "Nonexistent")
+        filtered_transients = filter_transients(self.transients, 1, "Nonexistent")
         self.assertEqual(len(filtered_transients), 0)
 
     def test_filter_transients_invalid_choice(self):
-        filtered_transients = filter_transients(self.transients, 3,
-                                                "Some Query")
+        filtered_transients = filter_transients(self.transients, 3, "Some Query")
         self.assertEqual(filtered_transients, self.transients)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()

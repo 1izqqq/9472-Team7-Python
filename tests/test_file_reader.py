@@ -18,16 +18,21 @@ class TestFileReader(unittest.TestCase):
 
     def test_load_json_success(self):
         # Use the test JSON file for loading
-        with open(os.path.join(os.path.dirname(__file__), 'test_transient_list.json')) as f:
+        with open(os.path.join(os.path.dirname(__file__),
+                               'test_transient_list.json')) as f:
             mock_data = json.load(f)
 
-        with patch('builtins.open', mock_open(read_data=json.dumps(mock_data))):
+            with patch('builtins.open',
+                       mock_open(read_data=json.dumps(mock_data))):
             result = FileReader.load_json('valid_file.json')
-            self.assertEqual(result, mock_data)  # Check against the original mock data
+            self.assertEqual(result,
+                             mock_data)  # Check against the original mock data
 
     def test_save_json_success(self):
         mock_data = [
-            {"id": "9", "name": "Liza's Cambridge", "description": "This is not my house.", "location": "Bareng Drive",
+            {"id": "9", "name": "Liza's Cambridge",
+             "description": "This is not my house.",
+             "location": "Bareng Drive",
              "price_per_head": 100, "contact": "09762969444"}]
         with patch('builtins.open', mock_open()) as mocked_file:
             FileReader.save_json(mock_data, 'output_file.json')

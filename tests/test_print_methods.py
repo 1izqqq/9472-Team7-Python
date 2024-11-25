@@ -8,9 +8,11 @@ class TestReservationFunctions(unittest.TestCase):
 
     def setUp(self):
         self.transients = [
-            {"id": 1, "name": "Cozy Cabin", "location": "123 Mountain Road", "price_per_head": 100,
+            {"id": 1, "name": "Cozy Cabin", "location": "123 Mountain Road",
+             "price_per_head": 100,
              "contact": "09123456789"},
-            {"id": 2, "name": "Seaside Villa", "location": "456 Ocean Drive", "price_per_head": 150,
+            {"id": 2, "name": "Seaside Villa", "location": "456 Ocean Drive",
+             "price_per_head": 150,
              "contact": "09876543210"}
         ]
 
@@ -53,7 +55,10 @@ class TestReservationFunctions(unittest.TestCase):
             f"Reservation To: {details['date_to']}\n"
             f"Payment method: {details['pay_method']}\n"
             f"Number of People: {details['number_of_people']}\n"
-            f"Calculating cost for {details['number_of_people']} people staying {details['num_nights']} night/s at ₱{details['price_per_head']} per person...\n"
+            f"Calculating cost for {details['number_of_people']} "
+            f"people staying {details['num_nights']} "
+            f"night/s at ₱{details['price_per_head']} "
+            f"per person...\n"
             f"Total cost: ₱{details['total_cost']}"
         ).strip()
 

@@ -68,10 +68,12 @@ class TestMenu(unittest.TestCase):
         mock_print.assert_any_call("4. Exit Cozy Cabin")
 
     @patch('builtins.input', side_effect=['1'])  # Simulate user input
-    @patch('reservation.show_available_dates', return_value=['2023-10-01', '2023-10-02'])
+    @patch('reservation.show_available_dates',
+           return_value=['2023-10-01', '2023-10-02'])
     @patch('reservation.reserve_dates')
     @patch('util.printing_methods.show_transient_table')
-    def test_select_transient(self, mock_show_transient_table, mock_reserve_dates, mock_show_available_dates,
+    def test_select_transient(self, mock_show_transient_table,
+                              mock_reserve_dates, mock_show_available_dates,
                               mock_input):
         mock_show_transient_table(self.transients)
         self.menu.select_transient()
@@ -81,16 +83,19 @@ class TestMenu(unittest.TestCase):
     @patch('builtins.input', side_effect=['1', '2'])  # Simulate sorting
     @patch('util.sort_filter.sort_transients_price')
     @patch('util.printing_methods.show_transient_table')
-    def test_sort_transients(self, mock_show_transient_table, mock_sort_transients_price, mock_input):
+    def test_sort_transients(self, mock_show_transient_table,
+                             mock_sort_transients_price, mock_input):
         mock_sort_transients_price.return_value = self.transients
         self.menu.sort_transients('asc')
-        mock_sort_transients_price.assert_called_once_with(self.transients, 'asc')
+        mock_sort_transients_price.assert_called_once_with(self.transients,
+                                                           'asc')
         mock_show_transient_table.assert_called_once_with(self.transients)
 
     @patch('builtins.input', side_effect=['1'])  # Simulate filtering
     @patch('util.sort_filter.filter_transients')
     @patch('util.printing_methods.show_transient_table')
-    def test_apply_filter(self, mock_show_transient_table, mock_filter_transients, mock_input):
+    def test_apply_filter(self, mock_show_transient_table,
+                          mock_filter_transients, mock_input):
         mock_filter_transients.return_value = self.transients
         self.menu.apply_filter(1)
         mock_filter_transients.assert_called_once()

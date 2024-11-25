@@ -48,11 +48,13 @@ class TestSortFilter(unittest.TestCase):
         self.assertEqual(filtered_transients[0]["name"], "Seaside Villa")
 
     def test_filter_transients_no_match(self):
-        filtered_transients = filter_transients(self.transients, 1, "Nonexistent")
+        filtered_transients = filter_transients(self.transients, 1,
+                                                "Nonexistent")
         self.assertEqual(len(filtered_transients), 0)
 
     def test_filter_transients_invalid_choice(self):
-        filtered_transients = filter_transients(self.transients, 3, "Some Query")
+        filtered_transients = filter_transients(self.transients, 3,
+                                                "Some Query")
         self.assertEqual(filtered_transients, self.transients)
 
 if __name__ == '__main__':

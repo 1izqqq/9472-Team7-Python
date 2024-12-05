@@ -36,88 +36,67 @@ def reserve_dates(transient, available_dates, transients, reservation_file='tran
     while True:
         ans_input = input("Would you like to reserve? (y/n) ").strip().lower()
         if ans_input in ["y", "yes"]:
-            try:
-                print()
-                print("Reservation Form")
-
-                client_name = input_name()
-
-                date_from = available_dates_list[enter_choice(1, len(available_dates_list), "Enter ID to select reservation start date: ") - 1]
-                date_to = available_dates_list[enter_choice(1, len(available_dates_list), "Enter ID to select reservation end date: ") - 1]
-
-                number_of_people = input_number_of_people()
-
-                # Validate date format
-                try:
-                    start_date = datetime.strptime(date_from, '%Y-%m-%d')
-                    end_date = datetime.strptime(date_to, '%Y-%m-%d')
-                except ValueError:
-                    print("Invalid date format. Please use YYYY-MM-DD.")
-                    continue
-
-                # Validate date range
-                if start_date > end_date:
-                    print("Error: Start date must be before or equal to end date.")
-                    continue
-
-                # Check if all dates in the range are available
-                all_dates_available = True
-                current_date = start_date
-                while current_date <= end_date:
-                    if current_date.strftime('%Y-%m-%d') not in available_dates:
-                        all_dates_available = False
-                        break
-                    current_date += timedelta(days=1)
-
-                if not all_dates_available:
-                    print("Error: Some dates in the selected range are not available.")
-                    continue
-
-                num_nights = (end_date - start_date).days + 1
-
-                pay_method = input_pay_method()
-
-                price_per_head = transient["price_per_head"]
-                total_cost = number_of_people * price_per_head * num_nights
-
-                printing_methods.show_reservation_details(client_name, date_from, date_to, pay_method, number_of_people, num_nights, price_per_head, total_cost)
-
-                confirm = input_confirm()
-                if confirm == "n":
-                    continue
-
-                current_date = start_date
-                while current_date <= end_date:
-                    date_key = current_date.strftime('%Y-%m-%d')
-                    transient['availability'][date_key]['status'] = "RESERVED"
-                    transient['availability'][date_key]['client_name'] = client_name
-                    transient['availability'][date_key]['date_from'] = date_from
-                    transient['availability'][date_key]['date_to'] = date_to
-                    transient['availability'][date_key]['number_of_people'] = number_of_people
-                    current_date += timedelta(days=1)
-
-                # Save the updated data back to the JSON file
-                FileReader.save_json(transients,reservation_file)
-
-                confirmation_message = (
-                    f"Reservation confirmed and saved.\n"
-                    f"Dear Mr./Ms. {client_name}, please proceed to {transient['location']} on {date_from} and enjoy your stay until {date_to}.\n"
-                    "Thank you for trusting The Cozy Cabin."
-                )
-
-                print()
-                print(confirmation_message)
-                return confirmation_message
-
-            except ValueError:
-                print("Invalid input. Please enter the number of people as an integer.")
-
+            ask_reservation_form(available_dates_list, transient, transients, reservation_file)
+            return
         elif ans_input in ["n", "no"]:
             print()
             print("Returning to main menu.")
             return 0
         else:
             print("Invalid input. Please enter yes/no or y/n.")
+
+def ask_reservation_form(available_dates_list, transient, transients, reservation_file='transient_list.json'):
+    while True:
+            print ( "\nReservation Form" )
+
+            # Reservation details
+            client_name = input_name ( )
+            start_date = enter_date(available_dates_list, "Enter ID to select reservation start date: ")
+            end_date = enter_date(available_dates_list, "Enter ID to select reservation end date: ")
+            num_nights = get_number_of_nights(start_date,end_date)
+            if num_nights == -1:
+                continue
+            pay_method = input_pay_method ( )
+            number_of_people = input_number_of_people ( )
+            price_per_head = transient [ "price_per_head" ]
+            total_cost = number_of_people * price_per_head * num_nights
+            printing_methods.show_reservation_details ( client_name , start_date , end_date , pay_method , number_of_people ,
+                                                        num_nights , price_per_head , total_cost )
+            confirm = input_confirm ( )
+            if confirm == "n" :
+                continue
+
+            update_values_to_file(start_date, end_date, transient, client_name, number_of_people, transients, reservation_file)
+
+            confirmation_message = (
+                f"Reservation confirmed and saved.\n"
+                f"Dear Mr./Ms. {client_name}, please proceed to {transient [ 'location' ]} on {start_date} and enjoy your stay until {end_date}.\n"
+                "Thank you for trusting The Cozy Cabin."
+            )
+            print ("\n" + confirmation_message )
+            return confirmation_message
+
+def get_number_of_nights(start, end):
+    start_date = datetime.strptime ( start , '%Y-%m-%d' )
+    end_date = datetime.strptime ( end , '%Y-%m-%d' )
+    if start_date > end_date :
+        print ( "Error: Start date must be before or equal to end date." )
+        return -1
+    return (end_date - start_date).days + 1
+
+def update_values_to_file(start_date, end_date, transient, client_name, number_of_people, transients, reservation_file):
+    current_date = datetime.strptime ( start_date , '%Y-%m-%d' )
+    while current_date <= datetime.strptime ( end_date , '%Y-%m-%d' ) :
+        date_key = current_date.strftime ( '%Y-%m-%d' )
+        transient [ 'availability' ] [ date_key ] [ 'status' ] = "RESERVED"
+        transient [ 'availability' ] [ date_key ] [ 'client_name' ] = client_name
+        transient [ 'availability' ] [ date_key ] [ 'date_from' ] = start_date
+        transient [ 'availability' ] [ date_key ] [ 'date_to' ] = end_date
+        transient [ 'availability' ] [ date_key ] [ 'number_of_people' ] = number_of_people
+        current_date += timedelta ( days = 1 )
+
+    # Save the updated data back to the JSON file
+    FileReader.save_json ( transients , reservation_file )
 
 def input_pay_method():
     while True:
@@ -177,3 +156,6 @@ def enter_choice(min_num, max_num, message):
                 return choice
         except ValueError:
             print("Invalid Input. Please enter a valid number.")
+
+def enter_date(available_dates_list, message):
+    return available_dates_list[(enter_choice(1, len(available_dates_list), message)) - 1]
